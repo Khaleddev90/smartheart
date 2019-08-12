@@ -1,0 +1,70 @@
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+@media(max-width: 1080px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media(max-width: 960px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media(max-width: 835px) {
+  html {
+    font-size: 10px;
+  }
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+}
+
+img {
+  pointer-events: none;
+}
+
+/* overflow and overflow-scrolling is for smooth scrolling on iPhone */
+#root {
+  flex: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.modal-open {
+  overflow: hidden !important;
+}
+
+.padding-pass{
+  padding-right: 45px;
+}
+
+.App {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.route-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.route-wrapper > div {
+  position: absolute;
+  width: 100%;
+}
+
+video {
+  height: 100%;
+  width: 100%;
+}
+

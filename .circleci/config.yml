@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8
+    working_directory: ~/webapp
+    steps:
+      - checkout
+      - run: yarn install
+      - run: REACT_APP_API_HOST=https://dev.heartface.tv yarn run build
+  deploy-staging:
+    docker:
+      - image: circleci/node:8
+        user: root
+    working_directory: ~/webapp
+    steps:
+      - checkout
+      - run: yarn install
+      - run: REACT_APP_API_HOST=https://dev.heartface.tv yarn run build
+      - add_ssh_keys:
+          fingerprints:
+            - "24:3c:4a:e1:ef:41:83:ef:7b:2e:0b:34:c1:65:94:c6"
+      - run:
+          name: Deploy to dev.heartface.tv
+          command: |
+            apt-get update; apt-get install -y rsync
+            rsync -av -e 'ssh -o BatchMode=yes -o StrictHostKeyChecking=no' build/ root@dev.heartface.tv:/var/www/heartface/
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy-staging:
+          filters:
+            branches:
+              only: Development
