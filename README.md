@@ -33,16 +33,3 @@ To run the app just run
 ```
 yarn start
 ```
-
-### Build and upload to staging environment
-
-```bash
-docker run --rm -ti  -v `pwd`:/workdir -w /workdir -eREACT_APP_API_HOST=https://dev.heartface.tv node:8 yarn run build
-rsync -avc build/ dev.heartface.tv:/var/www/heartface/
-```
-
-### Build and upload to production environment
-```bash
-docker run --rm -ti  -v `pwd`:/workdir -w /workdir -eREACT_APP_API_HOST=https://heartface.tv node:8 yarn run build
-rsync -avc build/ prod.heartface.tv:/var/www/heartface/
-```
